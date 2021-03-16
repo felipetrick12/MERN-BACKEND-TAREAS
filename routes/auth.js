@@ -1,8 +1,9 @@
 const {Router} = require('express');
-const { crearUsuario } = require('../controllers/auth');
+const { crearUsuario, loginUsuario,revalidarToken } = require('../controllers/auth');
 const router = Router();
 const {check } = require('express-validator');
 const { customValidator } = require('../middleware/customValidator');
+const { validarJWT } = require('../middleware/validarJWT');
 
 
 router.post(
@@ -14,6 +15,20 @@ router.post(
     customValidator
     ],
     crearUsuario );
+
+router.post(
+        '/', 
+        [
+            check('email','Email obligatorio').isEmail().not().isEmpty(),
+            check('password','Contraseña obligatoria').not().isEmpty(),
+            customValidator
+            
+        ],
+        loginUsuario 
+        );
+
+
+router.get('/renew',validarJWT,revalidarToken);
 
 
     

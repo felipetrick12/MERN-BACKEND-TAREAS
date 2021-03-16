@@ -22,6 +22,8 @@ app.use( express.json() );
 
 //importar rutas
 app.use( '/api/usuarios',require('./routes/auth')); 
+app.use( '/api/proyectos',require('./routes/proyectos')); 
+
 
 
 //crear puerto
