@@ -20,12 +20,14 @@ router.post('/create',[
         ],
         crearProyecto);
 
+//actualizarProyecto
 router.put('/:id',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
     customValidator
    ],
    actualizarProyecto);
 
+//eliminar proyecto
 router.delete('/:id', eliminarProyecto);
 
 

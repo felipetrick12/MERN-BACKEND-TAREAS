@@ -22,7 +22,9 @@ app.use( express.json() );
 
 //importar rutas
 app.use( '/api/usuarios',require('./routes/auth')); 
-app.use( '/api/proyectos',require('./routes/proyectos')); 
+app.use( '/api/proyectos',require('./routes/proyectos'));
+app.use( '/api/tareas',require('./routes/tareas')); 
+
 
 
 
