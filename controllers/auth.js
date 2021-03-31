@@ -12,7 +12,11 @@ const crearUsuario = async(req,res= response) => {
         let usuario= await Usuario.findOne({email});
 
         if(usuario){
-            return res.status(400).json({msg:'El usuario ya existe'})
+            return res.status(400).json({
+                ok:false,
+                msg: 'El Usuario ya existe',
+                
+            })
         }
 
         //crea un nuevo usuario 
@@ -28,12 +32,12 @@ const crearUsuario = async(req,res= response) => {
         console.log(usuario)
         
         //crear el jsonwebtoken
-        const token = await generarJWT(usuario.id,usuario.nombre) //guarda el token creado
+        const token = await generarJWT(usuario.id,usuario.name) //guarda el token creado
 
         res.status(201).json({
             ok:true,
             uid: usuario.id,
-            name: usuario.nombre,
+            name: usuario.name,
             token
         });
 
@@ -90,6 +94,21 @@ const loginUsuario = async (req,res= response) => {
     }
 }
 
+
+const autenticarUsuario =  async (req,res= response) => {    
+   try {
+       const usuario = await Usuario.findById(req.uid).select('-password');
+      
+       res.status(202).json({ 
+           usuario
+       })
+   } catch (error) {
+       res.status(500).json({
+           msg: 'hubo un error'
+       })
+   }
+}
+
 const revalidarToken =  async (req,res= response) => {
 
     const uid= req.uid;
@@ -109,6 +128,7 @@ const revalidarToken =  async (req,res= response) => {
 module.exports={
     crearUsuario,
     loginUsuario,
-    revalidarToken
+    revalidarToken,
+    autenticarUsuario
 
 }

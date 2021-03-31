@@ -1,5 +1,6 @@
 const express = require('express');
-const {dbConection} = require('./database/config')
+const {dbConection} = require('./database/config');
+const cors = require('cors');
 
 
 //creando el servidor 
@@ -8,6 +9,8 @@ const app = express();
 //conectar a la abse de datos 
 dbConection();
 
+//habilitar cors
+app.use(cors());
 
 //se define el puerto, sino encuentra la variable de entorno entonces el puerto 4000
 const PORT = process.env.PORT || 4000;
