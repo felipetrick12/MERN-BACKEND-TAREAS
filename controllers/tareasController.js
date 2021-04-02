@@ -28,7 +28,7 @@ const crearTareas = async(req,res= response) => {
 
         const tarea = new Tareas(req.body);
         await tarea.save();
-        res.status(401).json({
+        res.status(200).json({
             ok:true,
             tareas: tarea,
             msg: 'Tarea Creada'
@@ -46,9 +46,10 @@ const crearTareas = async(req,res= response) => {
 
 const obtenerTareas = async(req,res= response) => {
 
-    const {proyecto} = req.body;
+    const {proyecto} = req.query;
     const uid =req.uid;
 
+    
     try {
       
         const existeProyecto = await Proyecto.findById(proyecto);
@@ -69,7 +70,7 @@ const obtenerTareas = async(req,res= response) => {
 
         const tareas = await Tareas.find({proyecto});
 
-        res.status(401).json({
+        res.status(200).json({
            ok:true,
            tareas
           

@@ -10,7 +10,7 @@ const crearProyecto = async(req,res= response) => {
         proyecto.user = req.uid;
         const proyectoDB = await proyecto.save();
         
-        res.status(401).json({
+        res.status(201).json({
             ok:true,
             proyecto: proyectoDB
         })
@@ -30,7 +30,7 @@ const obtenerProyecto = async(req,res= response) => {
     try {
         const proyectos = await Proyecto.find({user: req.uid});
 
-        res.status(401).json({
+        res.status(200).json({
            ok:true,
            proyectos
    

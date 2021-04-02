@@ -15,7 +15,7 @@ const ProyectoSchema = Schema({
     },
     creado: {
         type: Date,
-        default: Date.now(),
+        default: Date,
         trim :true,
     }
 
